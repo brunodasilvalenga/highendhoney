@@ -388,7 +388,7 @@ export default function Home() {
                 other. We understand that open communication is essential in
                 breaking taboos and prejudices, and as such, we invest in
                 various channels to address the diverse topics that are part of
-                the sex worker's universe.
+                the sex worker&apos;s universe.
               </p>
               <p className="mt-8">
                 Our platform is committed to providing a professional and
