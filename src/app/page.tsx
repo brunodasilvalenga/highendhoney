@@ -1,5 +1,5 @@
 "use client";
-
+import Image from 'next/image';
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import {
   CheckBadgeIcon,
@@ -348,7 +348,9 @@ export default function Home() {
         >
           {cities.map((city) => (
             <li key={city.name}>
-              <img
+              <Image
+                width={300}
+                height={300}
                 className="aspect-[14/13] w-full rounded-2xl object-cover"
                 src={city.imageUrl}
                 alt=""
