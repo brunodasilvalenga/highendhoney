@@ -2,7 +2,8 @@
 
 import { Bars3Icon, MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Button } from "./ui/button";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -12,7 +13,7 @@ export default function Navbar() {
   const renderThemeChanger = () => {
     const currentTheme = theme === "system" ? systemTheme : theme;
 
-    console.log({currentTheme})
+    console.log({ currentTheme });
 
     if (currentTheme === "dark") {
       return (
@@ -39,7 +40,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="absolute inset-x-0 top-0 z-50">
+      <header className="inset-x-0 top-0 z-50">
         <nav
           className="flex items-center justify-between p-6 lg:px-8"
           aria-label="Global"
@@ -66,19 +67,8 @@ export default function Navbar() {
             </button>
           </div>
           <div className="hidden lg:flex lg:items-center lg:space-x-10">
-
-            <a
-              href="#"
-              className="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100"
-            >
-              Sign Up
-            </a>
-            <a
-              href="#"
-              className="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100"
-            >
-              Sign In
-            </a>
+            <Button variant="outline">Sign Up</Button>
+            <Button variant="outline">Sign In</Button>
             {renderThemeChanger()}
           </div>
         </nav>
