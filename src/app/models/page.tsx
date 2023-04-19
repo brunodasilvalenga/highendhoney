@@ -3,9 +3,9 @@ import { SheetFilters } from "@/components/SheetFilters";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import Image from "next/image";
 import supabase from "../utils/supabase";
 
+import Carousel from "@/components/Carousel";
 import { formatDistanceToNowStrict, parseISO } from "date-fns";
 
 export const revalidate = 0;
@@ -35,6 +35,12 @@ export default async function Models() {
     style: "currency",
     currency: "AUD",
   });
+
+  const slides = [
+    "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1620&q=80",
+    "https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8bW9kZWwlMjB3b21hbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
+    "https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1587&q=80",
+  ];
 
   return (
     <div className="flex h-screen flex-col items-center gap-4 ">
@@ -67,12 +73,22 @@ export default async function Models() {
             className="group rounded-lg bg-white p-4 shadow-md"
           >
             <div className="aspect-w-1 aspect-h-1 relative m-auto h-96 w-full overflow-hidden rounded-lg bg-gray-200">
-              <Image
+              {/* <Image
                 src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1620&q=80"
                 alt="Card Image"
                 className="rounded-lg object-cover object-center group-hover:opacity-75"
                 fill
-              />
+              /> */}
+              <Carousel>
+                {slides.map((s) => (
+                  <img
+                    key={s}
+                    src={s}
+                    alt="Card Image"
+                    className="rounded-lg object-cover object-center group-hover:opacity-75"
+                  />
+                ))}
+              </Carousel>
             </div>
 
             <div className="mt-2 flex flex-col gap-4">
