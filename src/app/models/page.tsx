@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
-import { supabase } from "../utils/supabase";
+import supabase from "../utils/supabase";
 
 import { formatDistanceToNowStrict, parseISO } from "date-fns";
 
@@ -13,7 +13,7 @@ export const revalidate = 0;
 async function getModels() {
   const { data, error } = await supabase.from("honeys").select();
 
-  console.log({ data, error });
+  // console.log({ data, error });
 
   if (error) {
     throw new Error(error.message);
@@ -27,14 +27,18 @@ export default async function Models() {
 
   const _renderLastView = (datetime: string) => {
     const distante = formatDistanceToNowStrict(parseISO(datetime));
-    console.log(distante);
 
     return `Seen ${distante} ago`;
   };
 
+  const curr = new Intl.NumberFormat("en-AU", {
+    style: "currency",
+    currency: "AUD",
+  });
+
   return (
-    <div className="flex flex-col content-center items-center gap-4">
-      <div className="max-w-md place-content-start">
+    <div className="flex h-screen flex-col items-center gap-4 ">
+      <div className="w-full">
         <h1 className="text-2xl tracking-tight text-gray-800">
           Honeys in <span className="font-bold text-gray-900">Sydney</span>
         </h1>
@@ -45,7 +49,7 @@ export default async function Models() {
         </span>
       </div>
 
-      <div className="flex w-96 flex-col rounded-lg bg-white p-4 shadow-md">
+      <div className="flex w-full flex-col rounded-lg bg-white p-4 shadow-md">
         <div className="flex w-full items-center justify-between space-x-2 ">
           <Input type="location" placeholder="Brisbane - QLD" />
           <Button type="submit">Search</Button>
@@ -56,16 +60,18 @@ export default async function Models() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-4">
+      <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-1">
         {models.map((model) => (
-          <div className="group rounded-lg bg-white p-4 shadow-md">
+          <div
+            key={model.id}
+            className="group rounded-lg bg-white p-4 shadow-md"
+          >
             <div className="aspect-w-1 aspect-h-1 relative m-auto h-96 w-full overflow-hidden rounded-lg bg-gray-200">
               <Image
                 src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1620&q=80"
                 alt="Card Image"
                 className="rounded-lg object-cover object-center group-hover:opacity-75"
-                width={500}
-                height={500}
+                fill
               />
             </div>
 
@@ -112,7 +118,7 @@ export default async function Models() {
                     />
                   </svg>
 
-                  {_renderLastView(model.last_view as string)}
+                  {_renderLastView(model.last_view)}
                 </Badge>
               </div>
               <div className="flex justify-between">
@@ -123,7 +129,7 @@ export default async function Models() {
                   <span className="text-sm text-gray-500">{model.age}yrs</span>
                 </div>
                 <p className="text-sm font-medium text-gray-900">
-                  AUD ${model.price}/h
+                  {curr.format(model.price)}/h
                 </p>
               </div>
 

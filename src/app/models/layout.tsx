@@ -13,7 +13,7 @@ export default function ModelsLayout({
   return (
     <>
       <Navbar />
-      <div className="container mx-auto">{children}</div>
+      <div className="container mx-auto px-6 md:max-w-2xl">{children}</div>
     </>
   );
 }

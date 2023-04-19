@@ -9,7 +9,7 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      models: {
+      honeys: {
         Row: {
           age: number | null
           created_at: string | null
